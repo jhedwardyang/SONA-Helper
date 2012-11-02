@@ -21,7 +21,20 @@ class Sona{
 	const sonaPriorityLowest	=	5;
 	static $sonaPriorityTypes	=	array("None", "Highest", "High", "Medium", "Low", "Lowest");
 	
-	
+	public static function checkUsername($sonaUsername){
+		global $db;
+		$where = array(self::sonaUsername => $sonaUsername);
+		$result = $db->select(self::tableName,array(self::sonaID),$where);
+		$count = 0;
+		while($row = mysql_fetch_array($result)){
+			$count++;
+		}
+		if($count>0){
+			return false;
+		}else{
+			return true;
+		}
+	}
 	public static function updateSonaCount($sonaID, $sonaCount){
 		global $db;
 		$set = array(self::sonaCount => safe($sonaCount));

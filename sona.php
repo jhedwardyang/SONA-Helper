@@ -108,7 +108,7 @@ $message = $totalUsersChecked." User(s) Checked
 Emails Sent To: ".$allUsers."
 ";
 $headers = array('From' => Config::$emailfrom, 'To' => $to, 'Subject' => $subject);
-if($isOn==1) $mail = $smtp->send($to,$headers,$message);
+if($isOn==1) //$mail = $smtp->send($to,$headers,$message);
 if(PEAR::isError($mail)) echo "!!E:".$mail->getMessage()."<br />";
 echo "Cron Ended...<br />";
 ?>
