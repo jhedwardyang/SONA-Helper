@@ -59,7 +59,7 @@ Updated: November 2nd, 2012 at 2:57PM
 			<table>
 				<tr>
 					<td><label for="username">SONA Username: </label></td>
-					<td><input id="username" type="text" name="username" /></td>
+					<td><input id="username" type="text" name="username" />@mylaurier.ca</td>
 				</tr>
 				<tr>
 					<td><label for="password">SONA Password: </label></td>
