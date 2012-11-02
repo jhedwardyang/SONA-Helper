@@ -50,7 +50,7 @@ class Sona{
 		global $db;
 		$where = array(self::sonaStatus => self::sonaStatusConfirmed);
 		$rows = array(self::sonaID, self::sonaUsername, self::sonaPassword, self::sonaCount, self::sonaPhoneStatus, self::sonaPhone);
-		$result = $db->select(self::tableName,$rows,$where,NULL,array(self::sonaPriority => Database::ORDER_BY_DESC, self::sonaID => Database::ORDER_BY_ASC));
+		$result = $db->select(self::tableName,$rows,$where,NULL,array(self::sonaPriority => Database::ORDER_BY_ASC, self::sonaID => Database::ORDER_BY_ASC));
 		$return = array();
 		while($row = mysql_fetch_array($result)){
 			$row[self::sonaPassword] = Config::decrypt($row[self::sonaPassword]);
