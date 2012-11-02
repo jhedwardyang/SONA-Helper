@@ -53,6 +53,7 @@ class Sona{
 		$result = $db->select(self::tableName,$rows,$where,NULL,array(self::sonaPriority => Database::ORDER_BY_DESC, self::sonaID => Database::ORDER_BY_ASC));
 		$return = array();
 		while($row = mysql_fetch_array($result)){
+			$row[self::sonaPassword] = Config::decrypt($row[self::sonaPassword]);
 			array_push($return, $row);
 		}
 		return $return;
@@ -68,7 +69,7 @@ class Sona{
 		
 		$set = array();
 		$set[self::sonaUsername] = safe($sonaUsername);
-		$set[self::sonaPassword] = safe($sonaPassword);
+		$set[self::sonaPassword] = Config::encrypt(safe($sonaPassword));
 		$set[self::sonaStatus] = safe($sonaStatus);
 		$set[self::sonaPriority] = safe($sonaPriority);
 		$set[self::sonaCount] = safe($sonaCount);
