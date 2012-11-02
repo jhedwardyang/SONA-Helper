@@ -8,7 +8,7 @@ if(isset($_GET['post']) && isset($_POST['username']) && isset($_POST['password']
 	if($agree == 'on'){
 		if(Sona::checkUsername($username)){
 			if($username!="" && $password!=""){
-				Sona::addUser($username,$password,Sona::sonaStatusConfirmed,Sona::sonaPriorityMedium,0);
+				Sona::addUser($username,$password,Sona::sonaStatusConfirmed,Sona::sonaPriorityMedium,0,Sona::sonaPhoneStatusOff,"");
 				$message = "User successfully added!";
 			}else{
 				$message = "Seriously...?";

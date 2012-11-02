@@ -93,9 +93,17 @@ foreach($users as $user){
 -Compliments of E
 ";
 		$headers = array('From' => Config::$emailfrom, 'To' => $to, 'Subject' => $subject);
-		if($isOn==1) $mail = $smtp->send($to,$headers,$message);
-		if(PEAR::isError($mail)) echo "!!E:".$mail->getMessage()."<br />";
-		echo "Email sent to: ".$username."<br />";
+		if($isOn==1){
+			$mail = $smtp->send($to,$headers,$message);
+			echo "Email sent to: ".$username."<br />";
+			if(PEAR::isError($mail)) echo "!!E:".$mail->getMessage()."<br />";
+			if($user[Sona::sonaPhoneStatus] == Sona::sonaPhoneStatusOn){
+				$to = $user[Sona::sonaPhone];
+				$mail = $smtp->send($to,$headers,$message);
+				if(PEAR::isError($mail)) echo "!!E:".$mail->getMessage()."<br />";
+				echo "Text sent to: ".$username."<br />";
+			}
+		}
 	}elseif($count==$sonaCount){
 		echo "User skipped: ".$username."<br />";
 	}
