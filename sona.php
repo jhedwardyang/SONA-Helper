@@ -9,32 +9,28 @@ $totalEmailsSent = 0;
 echo "Cron Started...<br />";
 
 $smtp = Mail::factory('smtp', array('host' => Config::$emailhost, 'auth' => true, 'username' => Config::$emailuser, 'password' => Config::$emailpass));
-  
-foreach($users as $user){
-	$username = $user[Sona::sonaUsername];
-	$password = $user[Sona::sonaPassword];
-	$sonaCount = $user[Sona::sonaCount];
-	
-	$totalUsersChecked++;
-	$urlLogin = "http://sbe.sona-systems.com/default.aspx";
-	$urlToPull = "http://sbe.sona-systems.com/all_exp.aspx";
-	
-	$cookieFile = 'cookie.txt';
-	
-	
-	$regexViewstate = '/__VIEWSTATE\" value=\"(.*)\"/i';
-	$regexEventVal  = '/__EVENTVALIDATION\" value=\"(.*)\"/i';
-	
-	/************************************************
-	* utility function: regexExtract
-	*    use the given regular expression to extract
-	*    a value from the given text;  $regs will
-	*    be set to an array of all group values
-	*    (assuming a match) and the nthValue item
-	*    from the array is returned as a string
-	************************************************/
-	function regexExtract($text, $regex, $regs, $nthValue)
-	{
+
+
+$urlLogin = "http://sbe.sona-systems.com/default.aspx";
+$urlToPull = "http://sbe.sona-systems.com/all_exp.aspx";
+
+$cookieFile = 'cookie.txt';
+
+
+$regexViewstate = '/__VIEWSTATE\" value=\"(.*)\"/i';
+$regexEventVal  = '/__EVENTVALIDATION\" value=\"(.*)\"/i';
+
+
+/************************************************
+ * utility function: regexExtract
+*    use the given regular expression to extract
+*    a value from the given text;  $regs will
+*    be set to an array of all group values
+*    (assuming a match) and the nthValue item
+*    from the array is returned as a string
+************************************************/
+function regexExtract($text, $regex, $regs, $nthValue)
+{
 	if (preg_match($regex, $text, $regs)) {
 	 $result = $regs[$nthValue];
 	}
@@ -42,8 +38,15 @@ foreach($users as $user){
 	 $result = "";
 	}
 	return $result;
-	}
+}
+
+
+foreach($users as $user){
+	$username = $user[Sona::sonaUsername];
+	$password = $user[Sona::sonaPassword];
+	$sonaCount = $user[Sona::sonaCount];
 	
+	$totalUsersChecked++;
 	
 	$ch = curl_init();
 	
